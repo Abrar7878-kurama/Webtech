@@ -73,28 +73,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		$gender = test_input($_POST["gender"]);
 	}
 
-	if (empty($_POST["degree"]))
+	if(!empty($_POST['degree']))
 	{
-		$degreeErr = "Degree is required";
-	}
-	else
-	{
-		$degree = test_input($_POST["degree"]);
-		if(!count($_POST["degree"] < 2))
-		{
-			$degreeErr = "Please select atleast two";
-			$degree = "";
-		}
-	}
+    	if (sizeof($_POST["degree"]) < 2)
+    	{
+    		$degreeErr="Please select at least two degrees";
+    	}
+    	else
+    	{
+    		$degreeErr="";
+    		$degree=$_POST['degree'];
+    	}
+  	}
+  	else 
+  		{
+  			$degreeErr="Please select at least two fields";
+  		} 
 
-	if (empty($_POST["blood"]))
-	{
-		$bloodErr = "Blood group is required.";
-	}
-	else
-	{
-		$blood = test_input($_POST["blood"]);
-	}
+   if (($_POST['blood'])=="")
+   {
+    $bloodErr="Blood group is requied";
+   } 
+  else 
+  {
+    $bloodErr="";
+    $blood=$_POST['blood'];
+  }
 
 }
 
@@ -138,23 +142,24 @@ return $data;
  	<hr>
 
  	<legend>DEGREE </legend>
- 	<input type="checkbox" name="degree[]" <?php if (isset($degree) && $degree=="ssc") echo "checked";?> value="ssc">SSC
- 	<input type="checkbox" name="degree[]" <?php if (isset($degree) && $degree=="hsc") echo "checked";?> value="hsc">HSC
- 	<input type="checkbox" name="degree[]" <?php if (isset($degree) && $degree=="bsc") echo "checked";?> value="bsc">BSc
- 	<input type="checkbox" name="degree[]" <?php if (isset($degree) && $degree=="msc") echo "checked";?> value="msc">MSc
- 	<span class="error">* <?php echo $degreeErr;?></span>
+ 	<input type="checkbox" name="degree[0]" value="SSC" <?php if(isset($_POST['degree'][0])) echo "checked"; ?> >SSC 
+  	<input type="checkbox" name="degree[1]" value="HSC" <?php if(isset($_POST['degree'][1])) echo "checked"; ?> >HSC 
+  	<input type="checkbox" name="degree[2]" value="BSc" <?php if(isset($_POST['degree'][2])) echo "checked"; ?> >BSc 
+  	<input type="checkbox" name="degree[3]" value="MSc" <?php if(isset($_POST['degree'][3])) echo "checked"; ?> >MSc
+  	<span class="error">* <?php echo $degreeErr;?></span>
  	<hr>
 
  	<legend>BLOOD GROUP </legend>
  	<select name="blood"> 
-		<option value="A+">A+</option>
-		<option value="B+">B+</option>
-		<option value="AB+">AB+</option>
-		<option value="O+">AB+</option>
-		<option value="A+">A-</option>
-		<option value="B+">B-</option>
-		<option value="AB+">AB-</option>
-		<option value="O+">AB-</option>
+		<option value=""></option>
+    	<option value="A+" <?php if($blood == 'A+'){ echo ' selected="selected"'; } ?> >A+</option>
+    	<option value="B+" <?php if($blood == 'B+'){ echo ' selected="selected"'; } ?> >B+</option>
+    	<option value="O+" <?php if($blood == 'O+'){ echo ' selected="selected"'; } ?> >O+</option>
+    	<option value="A-" <?php if($blood == 'A-'){ echo ' selected="selected"'; } ?> >A-</option>
+    	<option value="B-" <?php if($blood == 'B-'){ echo ' selected="selected"'; } ?> >B-</option>
+    	<option value="O-" <?php if($blood == 'O-'){ echo ' selected="selected"'; } ?> >O-</option>
+    	<option value="AB+" <?php if($blood == 'AB+'){ echo ' selected="selected"'; } ?> >AB+</option>
+    	<option value="AB-" <?php if($blood == 'AB-'){ echo ' selected="selected"'; } ?> >AB-</option>
 	</select>
 	<span class="error">* <?php echo $bloodErr;?></span>
  	<hr>
