@@ -57,9 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		$dob = test_input($_POST["dob"]);
 
-		if ($dob < date(01/01/1953) || $dob > date(12/31/1995))
+		if ($dob < "01/01/1953" || $dob > "12/31/1995"))
 		{
-			$dob = "Invalid date of birth";
+			$dobErr = "Invalid date of birth";
 			$dob ="";
 		}
 	}
@@ -159,7 +159,7 @@ return $data;
     	<option value="B-" <?php if($blood == 'B-'){ echo ' selected="selected"'; } ?> >B-</option>
     	<option value="O-" <?php if($blood == 'O-'){ echo ' selected="selected"'; } ?> >O-</option>
     	<option value="AB+" <?php if($blood == 'AB+'){ echo ' selected="selected"'; } ?> >AB+</option>
-    	<option value="AB-" <?php if($blood == 'AB-'){ echo ' selected="selected"'; } ?> >AB-</option>
+        <option value="AB-" <?php if($blood == 'AB-'){ echo ' selected="selected"'; } ?> >AB-</option>
 	</select>
 	<span class="error">* <?php echo $bloodErr;?></span>
  	<hr>
