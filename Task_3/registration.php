@@ -112,7 +112,7 @@
 					</fieldset>
 			<hr>
 
-			<input type="submit" name="Submit" value="Append">
+			<input type="submit" name="submit" value="Submit">
 			<input type="reset" name="Reset" value="Reset">
 		</fieldset>
 	</form>
